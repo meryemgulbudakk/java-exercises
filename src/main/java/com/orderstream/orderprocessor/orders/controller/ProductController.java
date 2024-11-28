@@ -17,6 +17,6 @@ public class ProductController {
     @PostMapping("/update-stock")
     public String updateStock(@RequestParam Long productId, @RequestParam int quantity) throws InterruptedException {
         productService.updateStock(productId, quantity);
-        return "Stok başarıyla güncellendi";
+        return "Stock updated successfully";
     }
 }
