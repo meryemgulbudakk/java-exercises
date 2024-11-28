@@ -24,15 +24,15 @@ public class OrdersService {
         executor.submit(() -> {
             try {
                 if (order.getCustomer() == null || order.getProduct() == null) {
-                    throw new IllegalArgumentException("Müşteri veya ürün bilgisi eksik!");
+                    throw new IllegalArgumentException("Customer or product information is missing!");
                 }
 
                 productService.updateStock(order.getProduct().getProductId(), order.getQuantity());
                 order.setOrderTimestamp(LocalDateTime.now());
                 ordersRepo.save(order);
             } catch (Exception e) {
-                System.err.println("Sipariş işlenemedi: " + e.getMessage());
-                throw new RuntimeException("Sipariş işlenemedi: " + e.getMessage());
+                System.err.println("Order could not be processed: " + e.getMessage());
+                throw new RuntimeException("Order could not be processed: " + e.getMessage());
             }
         });
     }
