@@ -1,6 +1,6 @@
 package com.orderstream.orderprocessor.orders.service;
 
-import com.orderstream.orderprocessor.orders.model.ProductModel;
+import com.orderstream.orderprocessor.orders.model.Product;
 import com.orderstream.orderprocessor.orders.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,14 +19,14 @@ public class ProductService {
         System.out.println("Stock check initiated: Product ID: " + productId);
         if (lock.tryLock(10, TimeUnit.SECONDS)) {
             try {
-                ProductModel productModel = productRepo.findById(productId)
+                Product product = productRepo.findById(productId)
                         .orElseThrow(() -> new RuntimeException("Product not found: Product ID" + productId));
-                if (productModel.getQuantity() < quantity) {
+                if (product.getQuantity() < quantity) {
                     throw new RuntimeException("Insufficient stock!, Product ID" + productId);
                 }
-                productModel.setQuantity(productModel.getQuantity() - quantity);
-                productRepo.save(productModel);
-                System.out.println("Stock updated successfully: Product ID: " + productId + ", New stock: " + productModel.getQuantity());
+                product.setQuantity(product.getQuantity() - quantity);
+                productRepo.save(product);
+                System.out.println("Stock updated successfully: Product ID: " + productId + ", New stock: " + product.getQuantity());
 
             } finally {
                 lock.unlock();
