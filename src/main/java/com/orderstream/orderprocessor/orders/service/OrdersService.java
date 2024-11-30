@@ -1,6 +1,6 @@
 package com.orderstream.orderprocessor.orders.service;
 
-import com.orderstream.orderprocessor.orders.model.OrdersModel;
+import com.orderstream.orderprocessor.orders.model.Orders;
 import com.orderstream.orderprocessor.orders.repository.OrdersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +20,7 @@ public class OrdersService {
 
     private final ExecutorService executor = Executors.newFixedThreadPool(10);
 
-    public void saveOrder(OrdersModel order) {
+    public void saveOrder(Orders order) {
         executor.submit(() -> {
             try {
                 if (order.getCustomer() == null || order.getProduct() == null) {
@@ -37,7 +37,7 @@ public class OrdersService {
         });
     }
 
-    public List<OrdersModel> getAllOrders() {
+    public List<Orders> getAllOrders() {
         return ordersRepo.findAll();
     }
 }
