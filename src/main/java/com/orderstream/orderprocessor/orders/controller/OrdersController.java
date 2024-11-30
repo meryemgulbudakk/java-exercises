@@ -1,6 +1,6 @@
 package com.orderstream.orderprocessor.orders.controller;
 
-import com.orderstream.orderprocessor.orders.model.OrdersModel;
+import com.orderstream.orderprocessor.orders.model.Orders;
 import com.orderstream.orderprocessor.orders.service.OrdersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,9 +15,9 @@ public class OrdersController {
     private OrdersService service;
 
     @PostMapping("/save")
-    public String saveOrder(@RequestBody OrdersModel ordersModel) {
+    public String saveOrder(@RequestBody Orders orders) {
         try {
-            service.saveOrder(ordersModel);
+            service.saveOrder(orders);
             return "Order saved successfully";
         } catch (RuntimeException e) {
             return "Order failed: " + e.getMessage();
@@ -25,7 +25,7 @@ public class OrdersController {
     }
 
     @GetMapping
-    public List<OrdersModel> getAllOrders() {
+    public List<Orders> getAllOrders() {
         return service.getAllOrders();
     }
 }
