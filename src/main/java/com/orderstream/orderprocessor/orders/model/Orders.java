@@ -7,18 +7,18 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "orders")
-public class OrdersModel {
+public class Orders {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderId;
 
     @ManyToOne
     @JoinColumn(name = "customer_id", nullable = false)
-    private CustomerModel customerModel;
+    private Customer customer;
 
     @ManyToOne
     @JoinColumn(name = "product_id", nullable = false)
-    private ProductModel productModel;
+    private Product product;
 
     @Column(nullable = false)
     private Integer quantity;
@@ -34,20 +34,20 @@ public class OrdersModel {
         this.orderId = orderId;
     }
 
-    public CustomerModel getCustomer() {
-        return customerModel;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setCustomer(CustomerModel customerModel) {
-        this.customerModel = customerModel;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
-    public ProductModel getProduct() {
-        return productModel;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProduct(ProductModel productModel) {
-        this.productModel = productModel;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     public Integer getQuantity() {
