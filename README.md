@@ -1,1 +1,1 @@
-# java-exercise
+# don't use the repo as a dir:)
